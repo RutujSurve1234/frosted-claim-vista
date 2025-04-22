@@ -34,13 +34,9 @@ const HeroSection = () => {
         </div>
         <div className="mt-16 relative">
           <GlassCard className="p-0 overflow-hidden">
-            {/* Add some content here to satisfy the children prop requirement */}
-            <div className="p-6">
-              <img 
-                src="/placeholder.svg" 
-                alt="Insurance claim dashboard preview" 
-                className="w-full rounded-lg shadow-lg"
-              />
+            {/* We still need to provide some content for the children prop */}
+            <div className="h-64 bg-gradient-to-r from-insurance-purple/30 to-insurance-pink/30 flex items-center justify-center">
+              <p className="text-white text-xl">Your Insurance Claims Dashboard</p>
             </div>
           </GlassCard>
         </div>
