@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -72,7 +71,6 @@ const Index = () => {
                 alt="ClaimVista Dashboard Preview" 
                 className="w-full rounded-xl shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl"></div>
             </GlassCard>
           </div>
         </div>
