@@ -9,8 +9,7 @@ import { ClaimProvider } from "./contexts/ClaimContext";
 
 // Pages
 import Index from "./pages/Index";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Claims from "./pages/Claims";
 import ClaimDetail from "./pages/ClaimDetail";
@@ -28,7 +27,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth" />;
   }
 
   return <>{children}</>;
@@ -38,9 +37,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      
+      <Route path="/auth" element={<Auth />} />
+
       {/* Protected Routes */}
       <Route 
         path="/dashboard" 
@@ -74,7 +72,7 @@ const AppRoutes = () => {
           </ProtectedRoute>
         } 
       />
-      
+
       {/* Catch all other routes */}
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -98,3 +96,4 @@ const App = () => (
 );
 
 export default App;
+
