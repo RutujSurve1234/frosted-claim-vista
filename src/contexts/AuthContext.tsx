@@ -1,7 +1,7 @@
 
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import type { User as SupabaseUser, Session } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 
 // User roles (should match Supabase enum type if possible)
 export type UserRole = "admin" | "hospital" | "agent" | "user";
@@ -33,6 +33,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const getUserFromSession = async (session: Session | null): Promise<User | null> => {
   if (!session?.user) return null;
 
+  // Fetch profile data without selecting avatar (which doesn't exist)
   const { data, error } = await supabase
     .from("profiles")
     .select("id, name, email, role")
@@ -55,24 +56,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Subscribe to auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    // Set up auth state listener FIRST (removing async on callback)
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session ?? null);
-      const currentUser = await getUserFromSession(session);
-      setUser(currentUser);
-      setLoading(false);
+
+      // Fetch current user asynchronously, but do not make callback async
+      if (session) {
+        getUserFromSession(session).then(setUser).finally(() => setLoading(false));
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
     });
 
-    // Check initial session
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    // THEN check for initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session ?? null);
-      const currentUser = await getUserFromSession(session);
-      setUser(currentUser);
-      setLoading(false);
+      if (session) {
+        getUserFromSession(session).then(setUser).finally(() => setLoading(false));
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
     });
 
+    // Cleanup subscription on unmount
     return () => {
-      subscription.unsubscribe();
+      if (data?.subscription) {
+        data.subscription.unsubscribe();
+      }
     };
   }, []);
 
@@ -95,7 +107,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true);
 
     // Sign up user with additional user metadata for name and role
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -110,9 +122,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false);
       throw new Error(error.message);
     }
-
-    // On successful sign up, user will get confirmation email (can be disabled in Supabase)
-    // User is not immediately logged in until confirmed, so we don't set user here
 
     setLoading(false);
   };
