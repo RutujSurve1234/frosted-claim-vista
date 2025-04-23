@@ -26,11 +26,11 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </GlassButton>
           </Link>
-          <a href="#how-it-works">
+          <Link to="#how-it-works" replace={false}>
             <GlassButton variant="outline" size="lg">
               Learn How It Works
             </GlassButton>
-          </a>
+          </Link>
         </div>
         <div className="mt-16 relative">
           <GlassCard className="p-0 overflow-hidden">
@@ -49,3 +49,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
