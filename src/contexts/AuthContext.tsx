@@ -26,33 +26,9 @@ interface AuthContextType {
 // Create context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock users for demonstration
+// Remove demo/mock users, start with empty array or no initial users
 const mockUsers: User[] = [
-  {
-    id: "1",
-    name: "Admin User",
-    email: "admin@example.com",
-    role: "admin",
-    avatar: "/lovable-uploads/d1e4c840-0f5b-41ae-befe-802ead66b3cd.png",
-  },
-  {
-    id: "2",
-    name: "Hospital Staff",
-    email: "hospital@example.com",
-    role: "hospital",
-  },
-  {
-    id: "3",
-    name: "Insurance Agent",
-    email: "agent@example.com",
-    role: "agent",
-  },
-  {
-    id: "4",
-    name: "Regular User",
-    email: "user@example.com",
-    role: "user",
-  },
+  // No demo users here, so new users will be added only via register
 ];
 
 // Provider component

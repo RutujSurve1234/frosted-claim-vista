@@ -68,28 +68,7 @@ const Login = () => {
     }
   };
 
-  // Demo login info helper
-  const handleDemoLogin = (userType: string) => {
-    let demoEmail = "";
-    
-    switch (userType) {
-      case "admin":
-        demoEmail = "admin@example.com";
-        break;
-      case "hospital":
-        demoEmail = "hospital@example.com";
-        break;
-      case "agent":
-        demoEmail = "agent@example.com";
-        break;
-      case "user":
-        demoEmail = "user@example.com";
-        break;
-    }
-    
-    setEmail(demoEmail);
-    setPassword("password");
-  };
+  // Removed demo login helper and demo buttons
 
   return (
     <AuthLayout
@@ -140,46 +119,6 @@ const Login = () => {
           >
             Sign up
           </Link>
-        </div>
-        
-        <div className="border-t border-white/10 pt-4 mt-4">
-          <p className="text-center text-white/70 text-sm mb-3">
-            Demo accounts (password: "password")
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            <GlassButton
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleDemoLogin("admin")}
-            >
-              Admin Demo
-            </GlassButton>
-            <GlassButton
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleDemoLogin("hospital")}
-            >
-              Hospital Demo
-            </GlassButton>
-            <GlassButton
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleDemoLogin("agent")}
-            >
-              Agent Demo
-            </GlassButton>
-            <GlassButton
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleDemoLogin("user")}
-            >
-              User Demo
-            </GlassButton>
-          </div>
         </div>
       </form>
     </AuthLayout>
