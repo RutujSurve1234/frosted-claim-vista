@@ -54,22 +54,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               ClaimVista
             </div>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-6">
             <div className="text-white/80">
               Welcome, {user.name}
             </div>
             <div className="relative">
               <div className="w-10 h-10 rounded-full bg-insurance-gradient flex items-center justify-center text-white border-2 border-white/30">
-                {user.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                ) : (
-                  user.name.charAt(0)
-                )}
+                {user.name.charAt(0)}
               </div>
             </div>
             <GlassButton
@@ -81,7 +73,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               Log Out
             </GlassButton>
           </div>
-          
+
           <button
             className="md:hidden glass-button p-2 rounded-md"
             onClick={toggleMobileMenu}
@@ -94,29 +86,21 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           </button>
         </div>
       </header>
-      
+
       {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden glass border-b border-white/20 animate-fade-in">
           <div className="container mx-auto py-4 px-2">
             <div className="flex items-center space-x-4 px-4 py-2 mb-4">
               <div className="w-10 h-10 rounded-full bg-insurance-gradient flex items-center justify-center text-white border-2 border-white/30">
-                {user.avatar ? (
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-full h-full rounded-full object-cover"
-                  />
-                ) : (
-                  user.name.charAt(0)
-                )}
+                {user.name.charAt(0)}
               </div>
               <div>
                 <div className="text-white/80 font-medium">{user.name}</div>
                 <div className="text-white/60 text-sm">{user.email}</div>
               </div>
             </div>
-            
+
             <nav className="flex flex-col space-y-1">
               {navItems.map((item) => (
                 <button
@@ -142,7 +126,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           </div>
         </div>
       )}
-      
+
       {/* Main content */}
       <div className="flex-1 flex">
         {/* Sidebar (desktop) */}
@@ -173,7 +157,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             </div>
           </div>
         </aside>
-        
+
         {/* Content */}
         <main className="flex-1 p-4">
           <div className="container mx-auto">
@@ -222,3 +206,4 @@ function getNavItemsByRole(role: UserRole) {
 }
 
 export default DashboardLayout;
+
