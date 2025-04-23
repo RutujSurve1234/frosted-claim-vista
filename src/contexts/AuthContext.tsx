@@ -12,7 +12,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  avatar?: string;
+  // Removed avatar because it doesn't exist in DB schema
 }
 
 // Context interface
@@ -35,7 +35,7 @@ const getUserFromSession = async (session: Session | null): Promise<User | null>
 
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, name, email, role, avatar")
+    .select("id, name, email, role")
     .eq("id", session.user.id)
     .single();
 
@@ -46,7 +46,6 @@ const getUserFromSession = async (session: Session | null): Promise<User | null>
     name: data.name,
     email: data.email,
     role: data.role as UserRole,
-    avatar: data.avatar || undefined,
   };
 };
 
@@ -57,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Subscribe to auth state changes
-    const { data: subscription } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { subscription } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session ?? null);
       const currentUser = await getUserFromSession(session);
       setUser(currentUser);
@@ -73,7 +72,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     return () => {
-      subscription?.unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 
@@ -154,3 +153,4 @@ export const useAuth = () => {
   }
   return context;
 };
+
