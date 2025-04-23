@@ -11,7 +11,8 @@ const HeroSection = () => {
     isAuthenticated
   } = useAuth();
   
-  return <section className="py-16 md:py-24 px-4 relative overflow-hidden">
+  return (
+    <section className="py-16 md:py-24 px-4 relative overflow-hidden">
       <div className="container mx-auto text-center max-w-4xl relative z-10">
         <h1 className="text-4xl md:text-6xl font-bold mb-6 gradient-text leading-tight">
           Insurance Claims Made Simple
@@ -26,7 +27,7 @@ const HeroSection = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </GlassButton>
           </Link>
-          <Link to="#how-it-works" replace={false}>
+          <Link to="/#how-it-works" replace={false}>
             <GlassButton variant="outline" size="lg">
               Learn How It Works
             </GlassButton>
@@ -45,8 +46,8 @@ const HeroSection = () => {
       {/* Background elements */}
       <div className="absolute top-1/4 -left-20 w-80 h-80 bg-insurance-purple/30 rounded-full filter blur-3xl animate-float -z-10"></div>
       <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-insurance-pink/30 rounded-full filter blur-3xl animate-float animation-delay-1000 -z-10"></div>
-    </section>;
+    </section>
+  );
 };
 
 export default HeroSection;
-

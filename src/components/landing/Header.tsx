@@ -12,9 +12,10 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-semibold gradient-text">ClaimVista</div>
         <nav className="hidden md:flex items-center space-x-6">
-          <Link to="#features" className="text-white/80 hover:text-white transition-colors">Features</Link>
-          <Link to="#how-it-works" className="text-white/80 hover:text-white transition-colors">How It Works</Link>
-          <Link to="#testimonials" className="text-white/80 hover:text-white transition-colors">Testimonials</Link>
+          {/* These link to sections within the index page */}
+          <Link to="/#features" className="text-white/80 hover:text-white transition-colors">Features</Link>
+          <Link to="/#how-it-works" className="text-white/80 hover:text-white transition-colors">How It Works</Link>
+          <Link to="/#testimonials" className="text-white/80 hover:text-white transition-colors">Testimonials</Link>
         </nav>
         <div className="flex items-center space-x-4">
           {isAuthenticated ? (
@@ -42,3 +43,4 @@ const Header = () => {
 };
 
 export default Header;
+
